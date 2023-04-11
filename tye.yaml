@@ -1,0 +1,84 @@
+  # tye application configuration file
+  # read all about it at https://github.com/dotnet/tye
+  #
+  # when you've given us a try, we'd love to know what you think:
+  #    https://aka.ms/AA7q20u
+  #
+  name: sociedade-primitiva-io
+
+  services:
+  - name: sociedadeprimitivaio-chatting-api
+    project: src/Services/Chatting/SociedadePrimitivaIO.Chatting.API/SociedadePrimitivaIO.Chatting.API.csproj
+    tags:
+      - chatting
+    bindings:
+      - port: 7001
+
+  - name: sociedadeprimitivaio-chatting-signalrhub
+    project: src/Services/Chatting/SociedadePrimitivaIO.Chatting.SignalrHub/SociedadePrimitivaIO.Chatting.SignalrHub.csproj
+    tags:
+      - chatting
+    bindings:
+      - port: 7002
+
+  - name: sociedadeprimitivaio-chatting-backgroundtasks
+    project: src/Services/Chatting/SociedadePrimitivaIO.Chatting.BackgroundTasks/SociedadePrimitivaIO.Chatting.BackgroundTasks.csproj
+    tags:
+      - chatting
+    bindings:
+      - port: 7003
+
+  - name: rabbitmq
+    image: rabbitmq:3-management
+    bindings:
+      - name: rabbit
+        port: 5672
+        protocol: rabbitmq
+        connectionString: "amqp://guest:guest@${host}:${port}"
+      - name: management
+        port: 15672
+
+  - name: redis
+    image: redis
+    bindings:
+    - port: 6379
+      connectionString: "${host}:${port},ssl=false,abortConnect=false"
+
+  - name: redis-cli
+    image: redis
+    args: "redis-cli -h redis MONITOR"      
+
+  - name: mongodb
+    image: mongo
+    bindings:
+      - port: 27020
+        connectionString: "mongodb://mongo1,mongo2,mongo3/?replicaSet=rs0"
+    volumes:
+    - source: ./scripts/mongo_replicaset_init.sh
+      target: /app/mongo_replicaset_init.sh
+    args: "/app/mongo_replicaset_init.sh"
+
+  #Mongo replicas
+  - name: mongo1
+    image: mongo
+    bindings:
+      - port: 27017
+        containerPort: 27017
+    volumes:
+      - name: mongodb-storage
+        target: /data/db
+    args: "mongod --replSet rs0"
+
+  - name: mongo2
+    image: mongo
+    bindings:
+      - port: 27018
+        containerPort: 27017
+    args: "mongod --replSet rs0"
+
+  - name: mongo3
+    image: mongo
+    bindings:
+      - port: 27019
+        containerPort: 27017
+    args: "mongod --replSet rs0"
