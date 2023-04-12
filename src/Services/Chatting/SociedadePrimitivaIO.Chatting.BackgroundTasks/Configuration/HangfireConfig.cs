@@ -11,7 +11,7 @@ namespace SociedadePrimitivaIO.Chatting.BackgroundTasks.Configuration
         public static IServiceCollection ConfigureHangfire(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("mongodb");
-            var databaseName = configuration["MongoSettings:DatabaseName"];
+            var databaseName = configuration["MongoSettings:HangfireDatabaseName"];
 
             var mongoUrlBuilder = new MongoUrlBuilder(connectionString);
             var mongoClient = new MongoClient(mongoUrlBuilder.ToMongoUrl());

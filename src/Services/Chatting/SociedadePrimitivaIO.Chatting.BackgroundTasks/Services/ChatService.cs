@@ -6,31 +6,23 @@ namespace SociedadePrimitivaIO.Chatting.BackgroundTasks.Services
     public class ChatService
     {
         private readonly ChatJob _chatJob;
+        private readonly SincronizacaoMensagemJob _sincronizacaoMensagemJob;
 
-        public ChatService(ChatJob chatJob)
+        public ChatService(ChatJob chatJob, SincronizacaoMensagemJob sincronizacaoMensagemJob)
         {
             _chatJob = chatJob;
+            _sincronizacaoMensagemJob = sincronizacaoMensagemJob;
         }
 
         public async Task PersistirMensagens(List<Guid> mensagens)
         {
-            BackgroundJob.Enqueue(() => DoSomeLongOperation(mensagens));
+            BackgroundJob.Enqueue(() => _sincronizacaoMensagemJob.AdicionarMensagens(mensagens));
             await Task.CompletedTask;
         }
 
         public void DesmutarOuvinte(Guid chatId, Guid ouvinteId, TimeSpan tempoParaDesmutar)
         {
 
-        }
-
-        public async Task DoSomeLongOperation(List<Guid> mensagens)
-        {
-            foreach (var mensagem in mensagens)
-            {
-                Console.Write($"Mensagems para salvar: {mensagem}");
-            }
-
-            await Task.CompletedTask;
         }
 
     }
