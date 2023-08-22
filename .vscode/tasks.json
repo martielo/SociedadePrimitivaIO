@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Generate Coverage Report (Chatting)",
+            "command": "reportgenerator",
+            "type": "shell",
+            "args": [
+                "-reports:${workspaceFolder}/src/Services/Chatting/tests/SociedadePrimitivaIO.Chatting.UnitTests/TestResults/lcov.info",
+                "-targetdir:${workspaceFolder}/src/Services/Chatting/tests/SociedadePrimitivaIO.Chatting.UnitTests/TestResults/coveragereport"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

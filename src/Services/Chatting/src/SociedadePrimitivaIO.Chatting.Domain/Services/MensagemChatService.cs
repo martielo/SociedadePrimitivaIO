@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate;
+﻿using SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate;
 using SociedadePrimitivaIO.Chatting.Domain.Aggregates.MensagemAggregate;
 using SociedadePrimitivaIO.Chatting.Domain.Aggregates.OuvinteAggregate;
 

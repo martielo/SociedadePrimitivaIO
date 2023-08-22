@@ -1,5 +1,6 @@
 ﻿using SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate;
 using SociedadePrimitivaIO.Chatting.Domain.Aggregates.OuvinteAggregate;
+using SociedadePrimitivaIO.Chatting.Domain.Events;
 using SociedadePrimitivaIO.Chatting.Domain.Exceptions;
 
 namespace SociedadePrimitivaIO.Chatting.Domain.Services
@@ -9,39 +10,49 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Services
         private readonly IOuvinteRepository _ouvinteRepository;
         private readonly IChatRepository _chatRepository;
 
-        public ModeracaoChatService(IOuvinteRepository ouvinteRepository, IChatRepository chatRepository)
+        public ModeracaoChatService(
+            IOuvinteRepository ouvinteRepository,
+            IChatRepository chatRepository
+        )
         {
             _ouvinteRepository = ouvinteRepository;
             _chatRepository = chatRepository;
         }
 
-        public async Task MutarOuvinte(Guid chatId, Guid ouvinteId, Guid moderadorId)
+        public async Task<Chat> MutarOuvinte(
+            Guid chatId,
+            Guid ouvinteId,
+            Guid moderadorId,
+            TimeSpan duracao,
+            string razao
+        )
         {
-            var chat = await _chatRepository.ObterPorId(chatId);
-            if (chat == null)
-            {
-                throw new ChatNaoEncontradoException(chatId);
-            }
-        }
+            var chat =
+                await _chatRepository.ObterPorId(chatId)
+                ?? throw new ChatNaoEncontradoException(chatId);
+            var _ =
+                await _ouvinteRepository.ObterPorId(ouvinteId)
+                ?? throw new OuvinteNaoEncontradoException(ouvinteId);
+            var moderador =
+                await _ouvinteRepository.ObterPorId(moderadorId)
+                ?? throw new OuvinteNaoEncontradoException(moderadorId);
 
-        public async Task RebaixarModerador(Guid podcastId, Guid apresentadorId, Guid moderadorId)
-        {
-            var apresentador = await _ouvinteRepository.ObterPorId(apresentadorId) ?? throw new OuvinteNaoEncontradoException(apresentadorId);
-
-            if (!apresentador.EhApresentador(podcastId))
-            {
-                //throw
-            }
-
-            var moderador = await _ouvinteRepository.ObterPorId(moderadorId) ?? throw new OuvinteNaoEncontradoException(moderadorId);
-
-            if (!moderador.EhModerador(podcastId))
+            if (!moderador.EhModerador(chat.PodcastId))
             {
                 throw new OuvinteNaoEhModeradorException(moderador.Id);
             }
 
-            moderador.MudarCargo(podcastId, Cargo.Ouvinte);
+            if (chat.OuvinteEstaMutado(ouvinteId))
+            {
+                throw new OuvinteNaoEstaMutadoException(ouvinteId);
+            }
 
+            chat.ChatDeveEstarAtivo();
+            var ouvinteMutado = new OuvinteMutado(ouvinteId, duracao, razao);
+            chat._ouvintesMutados.Add(ouvinteMutado);
+            chat.AddDomainEvent(new OuvinteMutadoDomainEvent(chat.Id, ouvinteMutado));
+
+            return chat;
         }
     }
 }

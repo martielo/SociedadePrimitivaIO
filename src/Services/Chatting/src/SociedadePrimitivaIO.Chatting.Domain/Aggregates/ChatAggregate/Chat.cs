@@ -16,7 +16,7 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
 
         private readonly List<Emoji> _emojisLivres;
         private readonly List<OuvinteAtivo> _ouvintesAtivos;
-        private readonly List<OuvinteMutado> _ouvintesMutados;
+        internal readonly List<OuvinteMutado> _ouvintesMutados;
 
         public Chat(string nome)
         {
@@ -30,7 +30,7 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
             _emojisLivres = new List<Emoji>();
         }
 
-        public void LigarChat()
+        public void AtivarChat()
         {
             Ativo = true;
         }
@@ -40,39 +40,8 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
             Ativo = false;
         }
 
-        public void MutarOuvinte(Guid ouvinteId, TimeSpan duracao, string razao)
-        {
-            ChatDeveEstarAtivo();
-
-            var ouvinteSilenciado = new OuvinteMutado(ouvinteId, duracao, razao);
-            _ouvintesMutados.Add(ouvinteSilenciado);
-
-            AddDomainEvent(new OuvinteMutadoDomainEvent(Id, ouvinteSilenciado));
-        }
-
-        public void DesmutarOuvinte(Guid ouvinteId)
-        {
-            ChatDeveEstarAtivo();
-
-            var ouvinteMutado = _ouvintesMutados.FirstOrDefault(o => o.OuvinteId == ouvinteId);
-            if (ouvinteMutado == null)
-            {
-                //throw
-            }
-
-            _ouvintesMutados.Remove(ouvinteMutado);
-            AddDomainEvent(new OuvinteDesmutadoDomainEvent(Id, ouvinteId));
-        }
-
-        public void OuvinteDeveEstarDesmutado(Guid ouvinteId)
-        {
-            bool ouvinteMutado = _ouvintesMutados.Any(o => o.OuvinteId == ouvinteId);
-
-            if (ouvinteMutado)
-            {
-                //throw
-            }
-        }
+        public bool OuvinteEstaMutado(Guid ouvinteId) =>
+            _ouvintesMutados.Any(o => o.OuvinteId == ouvinteId);
 
         public void ChatDeveEstarAtivo()
         {
@@ -80,13 +49,11 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
             {
                 //throw
             }
-
         }
 
         public void AtribuirOuvinte(Guid ouvinteId)
         {
             _ouvintesAtivos.Add(new OuvinteAtivo(ouvinteId));
-
         }
     }
 }
