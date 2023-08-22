@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\SociedadePrimitivaIO.Core\SociedadePrimitivaIO.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SociedadePrimitivaIO.Core\SociedadePrimitivaIO.Core.csproj" />
     <ProjectReference Include="..\SociedadePrimitivaIO.Chatting.Domain\SociedadePrimitivaIO.Chatting.Domain.csproj" />
   </ItemGroup>
 

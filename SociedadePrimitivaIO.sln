@@ -13,15 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Messag
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chatting", "Chatting", "{3667F768-3019-4D8B-9284-B5086C0ACE09}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.Domain", "src\Services\Chatting\SociedadePrimitivaIO.Chatting.Domain\SociedadePrimitivaIO.Chatting.Domain.csproj", "{F370B835-5D78-4263-BC3B-71BA74D23553}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.Domain", "src\Services\Chatting\src\SociedadePrimitivaIO.Chatting.Domain\SociedadePrimitivaIO.Chatting.Domain.csproj", "{F370B835-5D78-4263-BC3B-71BA74D23553}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.SignalrHub", "src\Services\Chatting\SociedadePrimitivaIO.Chatting.SignalrHub\SociedadePrimitivaIO.Chatting.SignalrHub.csproj", "{AF591BC5-5844-4648-A8FE-8328BB5F425C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.SignalrHub", "src\Services\Chatting\src\SociedadePrimitivaIO.Chatting.SignalrHub\SociedadePrimitivaIO.Chatting.SignalrHub.csproj", "{AF591BC5-5844-4648-A8FE-8328BB5F425C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.BackgroundTasks", "src\Services\Chatting\SociedadePrimitivaIO.Chatting.BackgroundTasks\SociedadePrimitivaIO.Chatting.BackgroundTasks.csproj", "{81B87BD9-704D-48C7-8FC7-6AB6541F0266}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.BackgroundTasks", "src\Services\Chatting\src\SociedadePrimitivaIO.Chatting.BackgroundTasks\SociedadePrimitivaIO.Chatting.BackgroundTasks.csproj", "{81B87BD9-704D-48C7-8FC7-6AB6541F0266}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.API", "src\Services\Chatting\SociedadePrimitivaIO.Chatting.API\SociedadePrimitivaIO.Chatting.API.csproj", "{846711AB-F942-48B3-AB1B-23A31873E002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.API", "src\Services\Chatting\src\SociedadePrimitivaIO.Chatting.API\SociedadePrimitivaIO.Chatting.API.csproj", "{846711AB-F942-48B3-AB1B-23A31873E002}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.Infrastructure", "src\Services\Chatting\SociedadePrimitivaIO.Chatting.Infrastructure\SociedadePrimitivaIO.Chatting.Infrastructure.csproj", "{AC8A09F5-517E-4EF8-817C-146C1264978D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.Infrastructure", "src\Services\Chatting\src\SociedadePrimitivaIO.Chatting.Infrastructure\SociedadePrimitivaIO.Chatting.Infrastructure.csproj", "{AC8A09F5-517E-4EF8-817C-146C1264978D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A02391F5-5475-4381-8934-CF3B927F8B58}"
 EndProject

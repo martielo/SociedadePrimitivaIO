@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\SociedadePrimitivaIO.Core\SociedadePrimitivaIO.Core.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\SociedadePrimitivaIO.MessageBus\SociedadePrimitivaIO.MessageBus.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SociedadePrimitivaIO.Core\SociedadePrimitivaIO.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SociedadePrimitivaIO.MessageBus\SociedadePrimitivaIO.MessageBus.csproj" />
     <ProjectReference Include="..\SociedadePrimitivaIO.Chatting.Domain\SociedadePrimitivaIO.Chatting.Domain.csproj" />
     <ProjectReference Include="..\SociedadePrimitivaIO.Chatting.Infrastructure\SociedadePrimitivaIO.Chatting.Infrastructure.csproj" />
   </ItemGroup>
