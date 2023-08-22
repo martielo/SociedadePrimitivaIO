@@ -35,6 +35,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FBD9DE6E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Chatting.UnitTests", "src\Services\Chatting\tests\SociedadePrimitivaIO.Chatting.UnitTests\SociedadePrimitivaIO.Chatting.UnitTests.csproj", "{A5582967-F4B8-4F7D-8F09-398F0F7D0011}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Ouvintes.API", "src\Services\Ouvintes\src\SociedadePrimitivaIO.Ouvintes.API\SociedadePrimitivaIO.Ouvintes.API.csproj", "{7469031D-348A-4AFC-88C2-488C2D2857B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SociedadePrimitivaIO.Ouvintes.Domain", "src\Services\Ouvintes\src\SociedadePrimitivaIO.Ouvintes.Domain\SociedadePrimitivaIO.Ouvintes.Domain.csproj", "{D67C684D-E061-43FA-B865-72BC4C782097}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ouvintes", "Ouvintes", "{B9882EA6-A765-43D5-9C7F-26B1400434F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +79,14 @@ Global
 		{A5582967-F4B8-4F7D-8F09-398F0F7D0011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5582967-F4B8-4F7D-8F09-398F0F7D0011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5582967-F4B8-4F7D-8F09-398F0F7D0011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7469031D-348A-4AFC-88C2-488C2D2857B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7469031D-348A-4AFC-88C2-488C2D2857B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7469031D-348A-4AFC-88C2-488C2D2857B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7469031D-348A-4AFC-88C2-488C2D2857B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D67C684D-E061-43FA-B865-72BC4C782097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67C684D-E061-43FA-B865-72BC4C782097}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67C684D-E061-43FA-B865-72BC4C782097}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67C684D-E061-43FA-B865-72BC4C782097}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +106,9 @@ Global
 		{BE81AE56-38B6-43C4-A4CB-9777BECB5CD3} = {3667F768-3019-4D8B-9284-B5086C0ACE09}
 		{FBD9DE6E-B36E-4691-872C-F4F9C005A01D} = {3667F768-3019-4D8B-9284-B5086C0ACE09}
 		{A5582967-F4B8-4F7D-8F09-398F0F7D0011} = {FBD9DE6E-B36E-4691-872C-F4F9C005A01D}
+		{7469031D-348A-4AFC-88C2-488C2D2857B9} = {B9882EA6-A765-43D5-9C7F-26B1400434F8}
+		{D67C684D-E061-43FA-B865-72BC4C782097} = {B9882EA6-A765-43D5-9C7F-26B1400434F8}
+		{B9882EA6-A765-43D5-9C7F-26B1400434F8} = {73A6BF6E-BBE9-418E-9156-2BA25093CA44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6098CEC-A681-4025-B81C-24948C3B3CF6}
