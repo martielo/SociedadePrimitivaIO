@@ -1,3 +1,4 @@
+using AutoFixture;
 using Moq;
 using SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate;
 using SociedadePrimitivaIO.Chatting.Domain.Aggregates.OuvinteAggregate;
@@ -18,22 +19,25 @@ namespace SociedadePrimitivaIO.Chatting.UnitTests.Domain.Services
         }
 
         [Fact]
-        public async Task MutarOuvinte_ChatIdInvalido_ThrowsChatNaoEncontradoException()
+        public async Task MutarOuvinte_OuvinteSolicitanteNaoEhModerador_ThrowsOuvinteNaoEhModeradorException()
         {
             // Arrange
-            _chatRepository.Setup(c => c.ObterPorId(It.IsAny<Guid>())).ReturnsAsync(() => null);
+            var fakeOuvinte = new Ouvinte(Guid.NewGuid(), "Fake ouvinte");
+            var fakeChat = new Chat("Fake chat", Guid.NewGuid());
+            var fakeOuvinteParaSerMutado = new Ouvinte(Guid.NewGuid(), "Ouvinte para mutar");
+
             var moderacaoChatService = new ModeracaoChatService(
                 _ouvinteRepository.Object,
                 _chatRepository.Object
             );
 
             // Act - Assert
-            await Assert.ThrowsAsync<ChatNaoEncontradoException>(
+            await Assert.ThrowsAsync<OuvinteNaoEhModeradorException>(
                 () =>
                     moderacaoChatService.MutarOuvinte(
-                        It.IsAny<Guid>(),
-                        It.IsAny<Guid>(),
-                        It.IsAny<Guid>(),
+                        fakeChat,
+                        fakeOuvinteParaSerMutado,
+                        fakeOuvinte,
                         It.IsAny<TimeSpan>(),
                         It.IsAny<string>()
                     )

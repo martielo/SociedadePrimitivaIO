@@ -20,37 +20,29 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Services
         }
 
         public async Task<Chat> MutarOuvinte(
-            Guid chatId,
-            Guid ouvinteId,
-            Guid moderadorId,
+            Chat chat,
+            Ouvinte ouvinte,
+            Ouvinte moderador,
             TimeSpan duracao,
             string razao
         )
         {
-            var chat =
-                await _chatRepository.ObterPorId(chatId)
-                ?? throw new ChatNaoEncontradoException(chatId);
-            var _ =
-                await _ouvinteRepository.ObterPorId(ouvinteId)
-                ?? throw new OuvinteNaoEncontradoException(ouvinteId);
-            var moderador =
-                await _ouvinteRepository.ObterPorId(moderadorId)
-                ?? throw new OuvinteNaoEncontradoException(moderadorId);
-
             if (!moderador.EhModerador(chat.PodcastId))
             {
                 throw new OuvinteNaoEhModeradorException(moderador.Id);
             }
 
-            if (chat.OuvinteEstaMutado(ouvinteId))
+            if (chat.OuvinteEstaMutado(ouvinte.Id))
             {
-                throw new OuvinteNaoEstaMutadoException(ouvinteId);
+                throw new OuvinteNaoEstaMutadoException(ouvinte.Id);
             }
 
             chat.ChatDeveEstarAtivo();
-            var ouvinteMutado = new OuvinteMutado(ouvinteId, duracao, razao);
+            var ouvinteMutado = new OuvinteMutado(ouvinte.Id, duracao, razao);
             chat._ouvintesMutados.Add(ouvinteMutado);
             chat.AddDomainEvent(new OuvinteMutadoDomainEvent(chat.Id, ouvinteMutado));
+
+            await _chatRepository.Adicionar(chat);
 
             return chat;
         }

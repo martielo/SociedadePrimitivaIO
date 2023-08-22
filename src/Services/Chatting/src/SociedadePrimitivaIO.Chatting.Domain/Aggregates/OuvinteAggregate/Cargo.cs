@@ -3,7 +3,6 @@
     public enum Cargo
     {
         Apresentador,
-        Moderador,
-        Ouvinte
+        Moderador
     }
 }

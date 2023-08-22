@@ -18,9 +18,10 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
         private readonly List<OuvinteAtivo> _ouvintesAtivos;
         internal readonly List<OuvinteMutado> _ouvintesMutados;
 
-        public Chat(string nome)
+        public Chat(string nome, Guid podcastId)
         {
             Nome = nome;
+            PodcastId = podcastId;
         }
 
         private Chat()
@@ -54,6 +55,11 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
         public void AtribuirOuvinte(Guid ouvinteId)
         {
             _ouvintesAtivos.Add(new OuvinteAtivo(ouvinteId));
+        }
+
+        public void AtribuirEpisodio(Guid podcastId, Guid episodioId)
+        {
+            EpisodioId = episodioId;
         }
     }
 }
