@@ -1,5 +1,6 @@
 ﻿using NetDevPack.Domain;
 using SociedadePrimitivaIO.Chatting.Domain.Events;
+using SociedadePrimitivaIO.Chatting.Domain.Policies;
 
 namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
 {
@@ -16,9 +17,10 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
 
         private readonly List<Emoji> _emojisLivres;
         private readonly List<OuvinteAtivo> _ouvintesAtivos;
-        internal readonly List<OuvinteMutado> _ouvintesMutados;
+        private readonly List<OuvinteMutado> _ouvintesMutados;
 
         public Chat(string nome, Guid podcastId)
+            : this()
         {
             Nome = nome;
             PodcastId = podcastId;
@@ -31,14 +33,32 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
             _emojisLivres = new List<Emoji>();
         }
 
-        public void AtivarChat()
-        {
-            Ativo = true;
-        }
+        public void AtivarChat() => Ativo = true;
 
-        public void EncerrarChat()
+        public void EncerrarChat() => Ativo = false;
+
+        public async Task MutarOuvinte(
+            Guid ouvinteId,
+            Guid moderadorId,
+            TimeSpan duracao,
+            string razao,
+            ICastigoChatPolicy castigoChatPolicy
+        )
         {
-            Ativo = false;
+            if (castigoChatPolicy == null)
+            {
+                // throw
+            }
+
+            await castigoChatPolicy.VerificarSePodeMutarOuvinte(
+                this,
+                ouvinteId,
+                moderadorId,
+                duracao
+            );
+            var ouvinteMutado = new OuvinteMutado(ouvinteId, duracao, razao);
+            _ouvintesMutados.Add(ouvinteMutado);
+            AddDomainEvent(new OuvinteMutadoDomainEvent(Id, ouvinteMutado));
         }
 
         public bool OuvinteEstaMutado(Guid ouvinteId) =>
@@ -48,7 +68,7 @@ namespace SociedadePrimitivaIO.Chatting.Domain.Aggregates.ChatAggregate
         {
             if (!Ativo)
             {
-                //throw
+                // throw
             }
         }
 
